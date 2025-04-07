@@ -1,27 +1,25 @@
-package factoryMethod
+package abstractFactory
 
-abstract class Pizza {
+
+abstract class Pizza(var ingredientFactory: PizzaIngredientFactory?) {
     var name: String? = null
-    var dough: String? = null
-    var sauce: String? = null
-    var toppings: ArrayList<String> = ArrayList()
 
-    fun prepare() {
-        println("Prepare $name")
-        //		System.out.println("Tossing dough...");
-//		System.out.println("Adding sauce...");
-//		System.out.println("Adding toppings: ");
-//		for (String topping : toppings) {
-//			System.out.println("   " + topping);
-//		}
-    }
+    var dough: Dough? = null
+    var sauce: Sauce? = null
+    var veggies: Array<Veggies>? = null
+    var cheese: Cheese? = null
+    var pepperoni: Pepperoni? = null
+    var clam: Clams? = null
+    var kimchi: Kimchi? = null
+
+    abstract fun prepare()
 
     fun bake() {
         println("Bake for 25 minutes at 350")
     }
 
-    open fun cut() {
-        println("Cut the pizza into diagonal slices")
+    fun cut() {
+        println("Cutting the pizza into diagonal slices")
     }
 
     fun box() {
@@ -29,16 +27,43 @@ abstract class Pizza {
     }
 
     override fun toString(): String {
-        val display = StringBuffer()
-        display.append("---- $name ----\n")
-        display.append("\t" + dough + "\n")
-        display.append("\t" + sauce + "\n")
-        for (topping in toppings) {
-            display.append("\t" + topping + "\n")
+        val result = StringBuffer()
+        result.append("---- $name ----\n")
+        if (dough != null) {
+            result.append("\t")
+            result.append(dough)
+            result.append("\n")
         }
-        return display.toString()
+        if (sauce != null) {
+            result.append("\t")
+            result.append(sauce)
+            result.append("\n")
+        }
+        if (cheese != null) {
+            result.append("\t")
+            result.append(cheese)
+            result.append("\n")
+        }
+        if (veggies != null) {
+            result.append("\t")
+            for (i in veggies!!.indices) {
+                result.append(veggies!![i])
+                if (i < veggies!!.size - 1) {
+                    result.append(", ")
+                }
+            }
+            result.append("\n")
+        }
+        if (clam != null) {
+            result.append("\t")
+            result.append(clam)
+            result.append("\n")
+        }
+        if (pepperoni != null) {
+            result.append("\t")
+            result.append(pepperoni)
+            result.append("\n")
+        }
+        return result.toString()
     }
 }
-
-
-

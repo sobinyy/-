@@ -1,12 +1,27 @@
-package factoryMethod
-
-
+package abstractFactory
 
 class KoreaPizzaStore : PizzaStore() {
-    public override fun createPizza(item: String): Pizza? {
-       return if (item == "kimchi")
-           KimchiPizza()
-       // 기타 다른 피자 생성 코드 추가
-       else null
+    override fun createPizza(item: String): Pizza? {
+        var pizza: Pizza? = null
+        val ingredientFactory: PizzaIngredientFactory =
+            KoreaPizzaIngredientFactory()
+
+        if (item == "cheese") {
+            pizza = CheesePizza(ingredientFactory)
+            pizza.name ="Korean Style Cheese Pizza"
+        } else if (item == "veggie") {
+            pizza = VeggiePizza(ingredientFactory)
+            pizza.name ="Korean Style Veggie Pizza"
+        } else if (item == "clam") {
+            pizza = ClamPizza(ingredientFactory)
+            pizza.name ="Korean Style Clam Pizza"
+        } else if (item == "pepperoni") {
+            pizza = PepperoniPizza(ingredientFactory)
+            pizza.name ="Korean Style Pepperoni Pizza"
+        } else if (item == "kimchi") {
+            pizza = KimchiPizza(ingredientFactory)
+            pizza.name = "Korean Style Kimchi Pizza"
+        }
+        return pizza
     }
 }

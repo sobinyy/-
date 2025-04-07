@@ -1,15 +1,25 @@
-package factoryMethod
+package abstractFactory
+
 
 class ChicagoPizzaStore : PizzaStore() {
-    public override fun createPizza(item: String): Pizza? {
-        return if (item == "cheese") {
-            ChicagoStyleCheesePizza()
+    override fun createPizza(item: String): Pizza? {
+        var pizza: Pizza? = null
+        val ingredientFactory: PizzaIngredientFactory =
+            ChicagoPizzaIngredientFactory()
+
+        if (item == "cheese") {
+            pizza = CheesePizza(ingredientFactory)
+            pizza.name ="Chicago Style Cheese Pizza"
         } else if (item == "veggie") {
-            ChicagoStyleVeggiePizza()
+            pizza = VeggiePizza(ingredientFactory)
+            pizza.name ="Chicago Style Veggie Pizza"
         } else if (item == "clam") {
-            ChicagoStyleClamPizza()
+            pizza = ClamPizza(ingredientFactory)
+            pizza.name ="Chicago Style Clam Pizza"
         } else if (item == "pepperoni") {
-            ChicagoStylePepperoniPizza()
-        } else null
+            pizza = PepperoniPizza(ingredientFactory)
+            pizza.name ="Chicago Style Pepperoni Pizza"
+        }
+        return pizza
     }
 }

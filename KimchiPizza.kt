@@ -1,12 +1,11 @@
-package factoryMethod
+package abstractFactory
 
-class KimchiPizza : Pizza() {
-    init {
-        name = "Korean Style Kimchi Pizza"
-        dough = "수정"
-        sauce = "수정"
-
-        toppings.add("수정")
-        toppings.add("수정")
+class KimchiPizza (ingredientFactory: PizzaIngredientFactory?) : Pizza(ingredientFactory) {
+    public override fun prepare() {
+        println("Preparing $name")
+       // dough = ingredientFactory!!.createDough()
+       // sauce = ingredientFactory!!.createSauce()
+       // cheese = ingredientFactory!!.createCheese()
+        kimchi = ingredientFactory!!.createKimchi()
     }
 }

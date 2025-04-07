@@ -1,17 +1,11 @@
-package factoryMethod
-
-import abstractFactory.Pizza
+package abstractFactory
 
 
 fun main(args: Array<String>) {
     val nyStore: PizzaStore = NYPizzaStore()
     val chicagoStore: PizzaStore = ChicagoPizzaStore()
-    val koreaStore:PizzaStore = KoreaPizzaStore()
 
-    var pizza = koreaStore.orderPizza("kimchi")
-    println("Kwanwoo ordered a $pizza\n")
-
-    pizza = nyStore.orderPizza("cheese")
+    var pizza = nyStore.orderPizza("cheese")
     println("Ethan ordered a $pizza\n")
 
     pizza = chicagoStore.orderPizza("cheese")
@@ -34,5 +28,9 @@ fun main(args: Array<String>) {
 
     pizza = chicagoStore.orderPizza("veggie")
     println("Joel ordered a $pizza\n")
+
+    val koreaStore: PizzaStore = KoreaPizzaStore()
+    pizza = koreaStore.orderPizza("kimchi")
+    println("Kwanwoo ordered a $pizza\n")
 }
 
